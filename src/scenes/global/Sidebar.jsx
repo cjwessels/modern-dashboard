@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Tooltip } from 'react-tooltip'
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
@@ -29,6 +30,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       }}
       onClick={() => setSelected(title)}
       icon={icon}
+      
     >
       <Typography>{title}</Typography>
       <Link to={to} />
@@ -58,6 +60,11 @@ const Sidebar = () => {
         },
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
+        },
+        "& .pro-menu::-webkit-scrollbar": {
+            display: "none !important",
+            backgroundColor: 'red !important'
+          
         },
       }}
     >
@@ -90,16 +97,17 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          {!isCollapsed && (
             <Box mb="25px">
+
+            
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
+              {!isCollapsed && (<img
                   alt="profile-user"
                   width="100px"
                   height="100px"
                   src={`../../assets/cjw.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                />)}
               </Box>
               <Box textAlign="center">
                 <Typography
@@ -108,7 +116,8 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Christiaan Wessels
+                  {!isCollapsed && ('Christiaan Wessels')}
+                  
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Admin
@@ -124,7 +133,7 @@ const Sidebar = () => {
                 />
 
                 <Typography
-                  variant="h4"
+                  variant= {!isCollapsed?"h4": "h5" } 
                   color={colors.grey[300]}
                   sx={{ m: "15px 0 5px 20px" }}
                 >
@@ -154,7 +163,7 @@ const Sidebar = () => {
                 />
 
                 <Typography
-                  variant="h4"
+                  variant= {!isCollapsed?"h4": "h5" } 
                   color={colors.grey[300]}
                   sx={{ m: "15px 0 5px 20px" }}
                 >
@@ -180,10 +189,11 @@ const Sidebar = () => {
                   icon={<HelpOutlineOutlinedIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                  
                 />
 
                 <Typography
-                  variant="h4"
+                  variant= {!isCollapsed?"h4": "h5" } 
                   color={colors.grey[300]}
                   sx={{ m: "15px 0 5px 20px" }}
                 >
@@ -219,7 +229,7 @@ const Sidebar = () => {
                 />
               </Box>
             </Box>
-          )}
+          
         </Menu>
       </ProSidebar>
     </Box>
