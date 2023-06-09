@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from 'yup'
-import {useMediaQuery} from "@mui/material";
+import {useMediaQuery, Snackbar, Alert} from "@mui/material";
 import Header from "../../components/Header";
 
 const initialValues = {
@@ -31,17 +32,37 @@ const userSchema = yup.object().shape({
 })
 
 const Form = () => {
+
+    const [openMessage, setOpenMessage] =useState(false)
+
+    const handleClick = () => {
+        setOpenMessage(true);
+      };
+    
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpenMessage(false);
+      };
+
+    
+
+
     const isNonMobile = useMediaQuery("(min-width:600)")
 
-    const handleFormSubmit = (values) =>{
+    const handleFormSubmit = (values, {resetForm}) =>{
         console.log(values)
+        resetForm({values:''});
+        handleClick()
     }
 
     return (
         <Box m='20px'>
             <Header title="CREATE USER" subtitle="Create a new user profile." />
             <Formik 
-                onSubmit={handleFormSubmit}
+                onSubmit={(values, resetForm) => handleFormSubmit(values, resetForm)}                
                 initialValues={initialValues}
                 validationSchema={userSchema}
             >
@@ -135,10 +156,17 @@ const Form = () => {
                                 sx={{gridColumn: 'span 4'}}
                                 />
                         </Box>
+                        <Box display="flex" justifyContent='end' mt='20px'>
+                            <Button type='submit' variant="contained" color='secondary' size="small" sx={{color: '#fff'}}>Create New User</Button>
+                            <Snackbar open={openMessage} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                                    You Successfully Added The New User!
+                                </Alert>
+                            </Snackbar>
+                        </Box>
                     </form>
                 )}
             </Formik>
-
         </Box>
     )
 }
