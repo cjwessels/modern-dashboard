@@ -4,6 +4,7 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 
+import CustomToolbar from "../../components/CustomToolbar";
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -96,7 +97,18 @@ const Contacts = () => {
         <DataGrid
           rows={mockDataContacts}
           columns={columns}
-          components={{ Toolbar: GridToolbar }}
+          components={{ Toolbar: CustomToolbar }}
+          componentsProps={{
+            toolbar: {
+              // updateOnclick: () => {
+              //   setUpdateData((i) => i + 1);
+              // },
+              filterOnClick: () => {
+                alert('You clicked me from far away!');
+              },
+              // modalState: modalState,
+            },
+          }}
         />
       </Box>
     </Box>
