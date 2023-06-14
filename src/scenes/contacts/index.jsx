@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
@@ -8,6 +10,12 @@ import CustomToolbar from "../../components/CustomToolbar";
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const handleFilter = () => {
+    alert("You clicked me from far away!");
+  };
 
   const columns = [
     {
@@ -104,7 +112,7 @@ const Contacts = () => {
               //   setUpdateData((i) => i + 1);
               // },
               filterOnClick: () => {
-                alert('You clicked me from far away!');
+                handleFilter();
               },
               // modalState: modalState,
             },
