@@ -20,7 +20,7 @@ import {
     return (
       <>        
         <GridToolbarContainer>
-          <GridToolbarExport printOptions={{ disableToolbarButton: true }} />
+          {/* <GridToolbarExport printOptions={{ disableToolbarButton: true }} /> */}
           <GridToolbarDensitySelector />
           <GridToolbarColumnsButton />
           <Button

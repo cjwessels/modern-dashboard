@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { getFilterList } from "../../helpers/multiFilter";
+
 import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
@@ -14,7 +16,8 @@ const Contacts = () => {
   const [filterOpen, setFilterOpen] = useState(false);
 
   const handleFilter = () => {
-    alert("You clicked me from far away!");
+    // getFilterList(mockDataContacts)
+    alert('ASAD Bitses')
   };
 
   const columns = [
@@ -27,6 +30,7 @@ const Contacts = () => {
     {
       field: "name",
       headerName: "Name",
+      type: "text",
       flex: 1,
       cellClassName: "name-column--cell",
     },
