@@ -59,10 +59,11 @@ const GeoChart = ({ isDashboard = false }) => {
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionTranslation={[0.5, 0.5]}
+      projectionScale={isDashboard ? 40 : 150}
+      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.5]}
       projectionRotation={[-10, 0, 0]}
       graticuleLineColor="#74ecc8"
-      borderWidth={0.5}
+      borderWidth={1.5}
       borderColor="#1d806e"
       defs={[
         {
@@ -118,31 +119,35 @@ const GeoChart = ({ isDashboard = false }) => {
           id: "gradient",
         },
       ]}
-      legends={[
-        {
-          anchor: "bottom-left",
-          direction: "column",
-          justify: true,
-          translateX: 20,
-          translateY: -100,
-          itemsSpacing: 0,
-          itemWidth: 94,
-          itemHeight: 18,
-          itemDirection: "left-to-right",
-          itemTextColor: colors.greenAccent[500],
-          itemOpacity: 0.85,
-          symbolSize: 18,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemTextColor: "#000000",
-                itemOpacity: 1,
+      legends={
+        isDashboard
+          ? undefined
+          : [
+              {
+                anchor: "bottom-left",
+                direction: "column",
+                justify: true,
+                translateX: 20,
+                translateY: -100,
+                itemsSpacing: 0,
+                itemWidth: 94,
+                itemHeight: 18,
+                itemDirection: "left-to-right",
+                itemTextColor: colors.greenAccent[500],
+                itemOpacity: 0.85,
+                symbolSize: 18,
+                effects: [
+                  {
+                    on: "hover",
+                    style: {
+                      itemTextColor: "#000000",
+                      itemOpacity: 1,
+                    },
+                  },
+                ],
               },
-            },
-          ],
-        },
-      ]}
+            ]
+      }
     />
   );
 };
