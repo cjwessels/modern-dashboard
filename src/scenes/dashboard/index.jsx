@@ -2,6 +2,8 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 
+import { useNavigate } from "react-router-dom";
+
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
@@ -18,8 +20,12 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const navigate = useNavigate()
+
   return (
-    <Box m="20px">
+    <Box m="20px"
+    sx={{ maxHeight :'100vh !important'}}
+    >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="MODERN DASHBOARD"
@@ -172,6 +178,19 @@ const Dashboard = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
+          sx={{
+            "& ::-webkit-scrollbar": {
+              // display: "none !important",
+              width: '6px !important'
+            },
+            "& ::-webkit-scrollbar-track": {
+              // background: '#868dfb',
+              background: '#fff'
+            },
+            "& ::-webkit-scrollbar-thumb": {
+              background: colors.blueAccent[700]
+            },
+          }}
         >
           <Box
             display="flex"
@@ -179,7 +198,7 @@ const Dashboard = () => {
             alignItems="center"
             borderBottom={`4px solid ${colors.primary[500]}`}
             colors={colors.grey[100]}
-            p="15px"
+            p="15px"            
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
               Recent Transactions
@@ -266,6 +285,14 @@ const Dashboard = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           padding="30px"
+          onClick={() => {
+            navigate(`/geography`, {
+              replace: true,
+              state: {
+                title: 'Geography Chart'
+              },
+            });
+          }}
         >
           <Typography
             variant="h5"

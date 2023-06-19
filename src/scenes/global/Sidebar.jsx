@@ -43,8 +43,9 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
   return (
-    <Box
+    <Box    
       sx={{
+        
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -60,9 +61,16 @@ const Sidebar = () => {
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
         },
-        "& .pro-menu::-webkit-scrollbar": {
-          display: "none !important",
-          backgroundColor: "red !important",
+        "& ::-webkit-scrollbar": {
+          // display: "none !important",
+          width: '3px'
+        },
+        "& ::-webkit-scrollbar-track": {
+          // background: '#868dfb',
+          background: '#fff'
+        },
+        "& ::-webkit-scrollbar-thumb": {
+          background: '#6870fa'
         },
       }}
     >
@@ -128,7 +136,6 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-
               <Typography
                 variant={!isCollapsed ? "h4" : "h5"}
                 color={colors.grey[300]}
@@ -136,7 +143,6 @@ const Sidebar = () => {
               >
                 Data
               </Typography>
-              {console.log(selected)}
               <Item
                 title="Manage Team"
                 to="/team"
@@ -158,6 +164,7 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
+              {console.log(selected)}
 
               <Typography
                 variant={!isCollapsed ? "h4" : "h5"}

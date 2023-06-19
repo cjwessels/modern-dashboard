@@ -116,6 +116,17 @@ const Contacts = () => {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.grey[100]} !important`,
           },
+          "& ::-webkit-scrollbar": {
+            // display: "none !important",
+            width: '6px'
+          },
+          "& ::-webkit-scrollbar-track": {
+            // background: '#868dfb',
+            background: '#fff'
+          },
+          "& ::-webkit-scrollbar-thumb": {
+            background: colors.blueAccent[700]
+          },
         }}
       >
         <DataGrid

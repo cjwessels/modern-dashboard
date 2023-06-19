@@ -11,6 +11,7 @@ const GeoChart = ({ isDashboard = false }) => {
   return (
     <ResponsiveChoropleth
       data={data}
+      onClick={(data) => {console.log(data.properties.name)}}
       theme={{
         // added
         axis: {
@@ -38,8 +39,7 @@ const GeoChart = ({ isDashboard = false }) => {
           text: {
             fill: colors.grey[100],
           },
-        },
-
+        },        
         tooltip: {
           container: {
             background: colors.greenAccent[800],
