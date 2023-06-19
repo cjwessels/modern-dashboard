@@ -74,9 +74,21 @@ const Team = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the team members" />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="TEAM" subtitle="Managing the team members" />
+      </Box>
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+      >
       <Box      
-        m="40px 0 0 0 "
+        gridColumn="span 12"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        // m="40px 0 0 0 "
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -113,7 +125,7 @@ const Team = () => {
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
-      </Box>
+      </Box></Box>
     </Box>
   );
 };

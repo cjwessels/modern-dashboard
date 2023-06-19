@@ -70,12 +70,24 @@ const Contacts = () => {
 
   return (
     <Box m="20px">
-      <Header
-        title="CONTACTS"
-        subtitle="List of contacts for future reference"
-      />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header
+          title="CONTACTS"
+          subtitle="List of contacts for future reference"
+        />
+      </Box>
       <Box
-        m="40px 0 0 0 "
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+      >
+      <Box
+        gridColumn="span 12"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        // m="40px 0 0 0 "
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -122,6 +134,7 @@ const Contacts = () => {
             },
           }}
         />
+      </Box>
       </Box>
     </Box>
   );

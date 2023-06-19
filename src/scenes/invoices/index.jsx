@@ -49,9 +49,21 @@ const Invoices = () => {
 
   return (
     <Box m="20px">
-      <Header title="INVOICES" subtitle="List of invoice balances" />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="INVOICES" subtitle="List of invoice balances" />
+      </Box>
       <Box
-        m="40px 0 0 0 "
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+      >
+        <Box
+        gridColumn="span 12"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        // m="40px 0 0 0 "
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -92,6 +104,8 @@ const Invoices = () => {
           components={{ Toolbar: GridToolbar }}
         />
       </Box>
+      </Box>
+      
     </Box>
   );
 };

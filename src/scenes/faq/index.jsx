@@ -1,3 +1,4 @@
+import { faqData } from "../../data/faqData";
 import {
   Box,
   useTheme,
@@ -14,25 +15,14 @@ const FAQ = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const faqData = [
-    {
-      id: "cjw001",
-      question: "new Question",
-      answer: "My very own answer",
-    },
-    {
-      id: "cjw002",
-      question: "another Question",
-      answer: "Just another answer",
-    },
-  ];
-
   return (
     <Box m="20px">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
       <Header
         title="FAQ"
         subtitle="Frequently Asked  Questions & Answers I have given over the time of my career"
       />
+      </Box>      
       {faqData.map((faq) => (
         <Box mb="10px">
           <Accordion>
