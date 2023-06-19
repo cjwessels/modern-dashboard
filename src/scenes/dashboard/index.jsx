@@ -1,5 +1,6 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
+
 import Header from "../../components/Header";
 import mockTransactions from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -42,7 +43,7 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box
         display="grid"
-        gridTemplateColumns="repeat(12, 1fr"
+        gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
@@ -57,25 +58,116 @@ const Dashboard = () => {
           <StatBox
             title="12,362"
             subtitle="Emails Sent"
-            progress="0.75"
+            progress="0.14"
             increase="+14%"
-            icon={<EmailIcon color={colors.greenAccent[600]} fontSize="26px" />}
-          />
-          <StatBox
-            title="12,362"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={<EmailIcon color={colors.greenAccent[600]} fontSize="26px" />}
-          />
-          <StatBox
-            title="12,362"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={<EmailIcon color={colors.greenAccent[600]} fontSize="26px" />}
+            icon={
+              <EmailIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
           />
         </Box>
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="98,125"
+            subtitle="Sales Obtained"
+            progress="0.19"
+            increase="+19%"
+            icon={
+              <PointOfSaleIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="362"
+            subtitle="New Clients"
+            progress="0.29"
+            increase="+29%"
+            icon={
+              <PersonAddIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="1,312,192"
+            subtitle="Traffic Inbound"
+            progress="0.84"
+            increase="+84%"
+            icon={
+              <TrafficIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </Box>
+
+        {/* ROW 2 */}
+        <Box
+          gridColumn="span 8"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        ></Box>
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        ></Box>
+
+        {/* ROW 3 */}
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        ></Box>
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        ></Box>
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        ></Box>
       </Box>
     </Box>
   );
