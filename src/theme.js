@@ -189,6 +189,12 @@ export const themeSettings = (mode) => {
         fontSize: 14,
       },
     },
+    transitions: {
+      easing: {
+        // This is the most common easing curve.
+        easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+    },
   };
 };
 

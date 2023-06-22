@@ -1,4 +1,5 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
+import { Box, Button, IconButton, Typography, useTheme, Modal, Grow } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 
@@ -16,9 +17,47 @@ import GeoChart from "../../components/GeoChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 
+
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80vw',
+    height: '80vh',
+    bgcolor: `${colors.primary[400]}`,
+    border: `2px solid ${colors.primary[900]}`,
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 5,
+  };
+
+  const [modalContent, setModalContent] = useState(<>HELP</>)
+  const handelModalContent = (id) => {
+    switch (id) {
+      case 'geo':
+            setModalContent(<GeoChart isDashboard={false} />)
+            break
+      case 'barChart':
+            setModalContent(<BarChart isDashboard={false} />)
+            break
+      case 'lineChart':
+            setModalContent(<LineChart isDashboard={false} />)
+            break
+      default:
+        console.log(id)
+        break;
+    }
+  }
+  
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const navigate = useNavigate()
 
@@ -137,6 +176,7 @@ const Dashboard = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          
         >
           <Box
             mt="25px"
@@ -169,7 +209,13 @@ const Dashboard = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          <Box height="250px" m="-20px 0 0 0"
+          sx={{cursor: 'zoom-in'}}
+          onClick={() => {
+            handelModalContent('lineChart')
+            handleOpen()
+          }}
+          >
             <LineChart isDashboard={true} />
           </Box>
         </Box>
@@ -265,9 +311,14 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+        sx={{cursor: 'zoom-in'}}
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          onClick={() => {
+            handelModalContent('barChart')
+            handleOpen()
+          }}
         >
           <Typography
             variant="h5"
@@ -281,17 +332,15 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+          id='geo'
+          sx={{cursor: 'zoom-in'}}
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           padding="30px"
           onClick={() => {
-            navigate(`/geography`, {
-              replace: true,
-              state: {
-                title: 'Geography Chart'
-              },
-            });
+            handelModalContent('geo')
+            handleOpen()
           }}
         >
           <Typography
@@ -306,8 +355,22 @@ const Dashboard = () => {
           </Box>
         </Box>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Grow in={open} out={!open} style={modalStyle} {...(open ? { timeout: 1000 } : { timeout: 1000 })}>
+          <Box sx={modalStyle}>
+          {modalContent}
+          </Box>
+        </Grow>
+      </Modal>
     </Box>
   );
 };
 
 export default Dashboard;
+
+
