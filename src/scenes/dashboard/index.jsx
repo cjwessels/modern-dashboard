@@ -5,6 +5,8 @@ import { mockTransactions } from "../../data/mockData";
 
 import { useNavigate } from "react-router-dom";
 
+import {PDFDownloadLink} from "@react-pdf/renderer";
+
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
@@ -16,6 +18,8 @@ import BarChart from "../../components/BarChart";
 import GeoChart from "../../components/GeoChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+
+import PrintDashboard from "../../components/printComponents/Dashboard";
 
 
 const Dashboard = () => {
@@ -71,7 +75,12 @@ const Dashboard = () => {
           subtitle="Welcome to the modern dashboard"
         />
         <Box>
-          <Button
+        <PDFDownloadLink
+            document = {<PrintDashboard />}
+            fileName="Test">
+              {
+                
+                <Button
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -83,6 +92,9 @@ const Dashboard = () => {
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
           </Button>
+              }
+          
+          </PDFDownloadLink>
         </Box>
       </Box>
       {/* GRID & CHARTS */}
