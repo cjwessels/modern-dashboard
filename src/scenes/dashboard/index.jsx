@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Box, Button, IconButton, Typography, useTheme, Modal, Grow } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 import { useNavigate } from "react-router-dom";
 
-import {PDFDownloadLink} from "@react-pdf/renderer";
+// import {PDFDownloadLink} from "@react-pdf/renderer";
 
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
@@ -20,11 +22,42 @@ import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 
 import PrintDashboard from "../../components/printComponents/Dashboard";
-
+import DashboardReport from "../../components/printComponents/DashboardReport";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+  const createPDF = async () => {   
+    
+    const pdf = new jsPDF("portrait", "pt", "a4");     
+    const data = await html2canvas(document.querySelector("#multiPDF1"));
+    const img = data.toDataURL("image/png");  
+    const imgProperties = pdf.getImageProperties(img);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+    const data2 = await html2canvas(document.querySelector("#multiPDF2"));
+    const img2 = data2.toDataURL("image/png");  
+    const imgProperties2 = pdf.getImageProperties(img2);
+    const pdfWidth2 = pdf.internal.pageSize.getWidth();
+    const pdfHeight2 = (imgProperties.height * pdfWidth) / imgProperties2.width;
+    // pdf.addImage(img2, "PNG", 0, 160, pdfWidth2, pdfHeight2);
+    
+    const data3 = await html2canvas(document.querySelector("#multiPDF3"));
+    const img3 = data3.toDataURL("image/png");  
+    const imgProperties3 = pdf.getImageProperties(img3);
+    const pdfWidth3 = pdf.internal.pageSize.getWidth();
+    const pdfHeight3 = (imgProperties.height * pdfWidth) / imgProperties3.width;
+    pdf.addPage()
+    pdf.addImage(img3, "PNG", 0, 0, pdfWidth3, pdfHeight3);
+
+    
+    pdf.save("shipping_label.pdf");
+  };
+
 
   const modalStyle = {
     position: 'absolute',
@@ -63,6 +96,10 @@ const Dashboard = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [openReport, setOpenReport] = useState(false);
+  const handleOpenReport = () => setOpenReport(true);
+  const handleCloseReport = () => setOpenReport(false);
+
   const navigate = useNavigate()
 
   return (
@@ -75,12 +112,8 @@ const Dashboard = () => {
           subtitle="Welcome to the modern dashboard"
         />
         <Box>
-        <PDFDownloadLink
-            document = {<PrintDashboard />}
-            fileName="Test">
-              {
-                
-                <Button
+          <Button
+          onClick={() => handleOpenReport()}
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -92,9 +125,15 @@ const Dashboard = () => {
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
           </Button>
+        {/* <PDFDownloadLink
+            document = {<PrintDashboard />}
+            fileName="Test">
+              {
+                
+                
               }
           
-          </PDFDownloadLink>
+          </PDFDownloadLink> */}
         </Box>
       </Box>
       {/* GRID & CHARTS */}
@@ -188,6 +227,7 @@ const Dashboard = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          id='multiPDF1'
           
         >
           <Box
@@ -232,6 +272,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+        id='multiPDF2'
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -323,6 +364,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
+        id='multiPDF3'
         sx={{cursor: 'zoom-in'}}
           gridColumn="span 4"
           gridRow="span 2"
@@ -365,7 +407,8 @@ const Dashboard = () => {
           <Box height="200px">
             <GeoChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box>       
+        
       </Box>
       <Modal
         open={open}
@@ -379,6 +422,19 @@ const Dashboard = () => {
           </Box>
         </Grow>
       </Modal>
+      <Modal
+        open={openReport}
+        onClose={handleCloseReport}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Grow in={open} out={!open} style={modalStyle} {...(open ? { timeout: 1000 } : { timeout: 1000 })}>
+          <Box sx={modalStyle}>
+          <DashboardReport closeReport={handleCloseReport}/>
+          </Box>
+        </Grow>
+      </Modal>
+      
     </Box>
   );
 };
