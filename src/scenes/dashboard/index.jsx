@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Button, IconButton, Typography, useTheme, Modal, Grow } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
@@ -7,10 +7,14 @@ import html2canvas from "html2canvas";
 
 import { useNavigate } from "react-router-dom";
 
+import { CSVLink, CSVDownload } from "react-csv";
+import { mockLineData as data } from "../../data/mockData";
+
 // import {PDFDownloadLink} from "@react-pdf/renderer";
 
 import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import FileOpenOutlinedIcon from '@mui/icons-material/FileOpenOutlined';
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -58,6 +62,49 @@ const Dashboard = () => {
     pdf.save("shipping_label.pdf");
   };
 
+  const [exportData, setExportData] =useState([])
+
+  const  headers = [
+    { label: "Name", key: "name" },
+    { label: "Planes", key: "plane" } ,   
+    { label: "Helicopters", key: "helicopter" }   , 
+    { label: "Boats", key: "boat" }    ,
+    { label: "Trains", key: "train" }    ,
+    { label: "Subways", key: "subway" }    ,
+    { label: "Busses", key: "bus" }    ,
+    { label: "Cars", key: "car" }    ,
+    { label: "Moto", key: "moto" }    ,
+    { label: "Bicycles", key: "bicycle" }  ,  
+    { label: "Horses", key: "horse" }    ,
+    { label: "Skateboards", key: "skateboard" }   , 
+    { label: "Others", key: "others" }    
+  ]
+
+  const newData = () => {
+   const dat = data.map((con) => (      
+      {name: con.id, 
+        helicopter: con.data[0].y,
+        plane: con.data[1].y,
+        boat: con.data[2].y,
+        train: con.data[3].y,
+        subway: con.data[4].y,
+        bus: con.data[5].y,
+        car: con.data[6].y,
+        moto: con.data[7].y,
+        bicycle: con.data[8].y,
+        horse: con.data[9].y,
+        skateboard: con.data[10].y,
+        others: con.data[11].y
+      }    
+      ))     
+    return dat
+  }
+
+  useEffect(() => {
+    setExportData(newData())
+  },[])
+  
+console.log(exportData)
 
   const modalStyle = {
     position: 'absolute',
@@ -113,7 +160,7 @@ const Dashboard = () => {
         />
         <Box>
           <Button
-          onClick={() => handleOpenReport()}
+          onClick={handleOpenReport}
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
@@ -122,8 +169,8 @@ const Dashboard = () => {
               padding: "10px 20px",
             }}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
+            <FileOpenOutlinedIcon sx={{ mr: "10px" }} />
+           Open Printer Friendly View
           </Button>
         {/* <PDFDownloadLink
             document = {<PrintDashboard />}
@@ -254,11 +301,22 @@ const Dashboard = () => {
               </Typography>
             </Box>
             <Box>
-              <IconButton>
+            <CSVLink
+              filename={"my-file.csv"}
+              headers={headers}
+              data={exportData}
+             
+            >
+              <IconButton
+              sx={{backgroundColor: colors.blueAccent[700], borderRadius: '5px', fontSize: '12px',textTransform: "uppercase", fontWeight: 'bold' }}
+              >
                 <DownloadOutlinedIcon
                   sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
+                /> Download raw data csv
               </IconButton>
+            </CSVLink>
+              
+              
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0"
@@ -361,9 +419,9 @@ const Dashboard = () => {
               $48,352 revenue generated
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
+          </Box>  
         </Box>
-        <Box
+        <Box 
         id='multiPDF3'
         sx={{cursor: 'zoom-in'}}
           gridColumn="span 4"
@@ -425,14 +483,12 @@ const Dashboard = () => {
       <Modal
         open={openReport}
         onClose={handleCloseReport}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Grow in={open} out={!open} style={modalStyle} {...(open ? { timeout: 1000 } : { timeout: 1000 })}>
-          <Box sx={modalStyle}>
-          <DashboardReport closeReport={handleCloseReport}/>
+        aria-labelledby="modal-print"
+        aria-describedby="modal-print"
+      > 
+          <Box sx={{...modalStyle, overflow: 'scroll', overflowX: 'hidden' }}>
+            <DashboardReport closeReport={handleCloseReport}/>
           </Box>
-        </Grow>
       </Modal>
       
     </Box>

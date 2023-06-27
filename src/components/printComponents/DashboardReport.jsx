@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useEffect } from "react";
 
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
@@ -9,7 +10,8 @@ import GeoChart from "../../components/GeoChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 import Header from "../../components/Header";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+// import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 
 const DashboardReport = ({closeReport}) => {
     // const closeReport = props.handleCloseReport
@@ -19,20 +21,19 @@ const DashboardReport = ({closeReport}) => {
   const createPDF = async () => {   
     
     const pdf = new jsPDF("portrait", "pt", "a4");     
-    const data = await html2canvas(document.querySelector("#multiPDF1"));
+    const data = await html2canvas(document.querySelector("#modalPDF"));
     const img = data.toDataURL("image/png");  
     const imgProperties = pdf.getImageProperties(img);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
     pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);      
     pdf.save("shipping_label.pdf");
-    closeReport()
-    // handleCloseReport()
+    // closeReport()
   };
 
-  createPDF()
+  
   return (
-    <Box  m="20px">
+    <Box  m="20px" >
         <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="MODERN DASHBOARD"
@@ -47,19 +48,32 @@ const DashboardReport = ({closeReport}) => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
+            onClick={()=>createPDF()}
           >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
+            <PictureAsPdfOutlinedIcon sx={{ mr: "10px" }} />
+            Download As PDF
           </Button>
         </Box>
       </Box>
       <Box
-        id='multiPDF1'
+        id='modalPDF'
         display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140px"
+        gridTemplateColumns="repeat(12, 8fr)"
+        gridAutoRows="440px"
         gap="20px"
       >
+        <Box
+        
+          gridColumn="span 12"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+
+         <BarChart isDashboard={false} />
+         
+        </Box>
         <Box
           gridColumn="span 12"
           backgroundColor={colors.primary[400]}
@@ -68,8 +82,8 @@ const DashboardReport = ({closeReport}) => {
           justifyContent="center"
         >
 
-         <LineChart isDashboard={false} />
-         <BarChart isDashboard={false} />   
+        <LineChart isDashboard={false} />   
+         
         </Box>
 
         </Box>
