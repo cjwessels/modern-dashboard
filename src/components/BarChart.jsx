@@ -3,7 +3,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashboard = false }) => {
+const BarChart = ({ isDashboard = false, isPrintModal = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -15,27 +15,27 @@ const BarChart = ({ isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
+              stroke: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
           legend: {
             text: {
-              fill: colors.grey[100],
+              fill: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
           ticks: {
             line: {
-              stroke: colors.grey[100],
+              stroke: isPrintModal ? colors.grey[900] : colors.grey[100],
               strokeWidth: 1,
             },
             text: {
-              fill: colors.grey[100],
+              fill: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
         },
         legends: {
           text: {
-            fill: colors.grey[100],
+            fill: isPrintModal ? colors.grey[900] : colors.grey[100],
           },
         },
 

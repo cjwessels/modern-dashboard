@@ -9,11 +9,11 @@ import Header from "../../components/Header";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 
 const DashboardModal = () => {
-    const theme = useTheme();
+  const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
-    <Box  m="20px">
-        <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box m="20px">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="MODERN DASHBOARD"
           subtitle="Welcome to the modern dashboard"
@@ -45,13 +45,10 @@ const DashboardModal = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-        >
-            
-        </Box>
-
-        </Box>
+        ></Box>
+      </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default DashboardModal
+export default DashboardModal;

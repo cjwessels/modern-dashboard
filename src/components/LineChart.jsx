@@ -3,7 +3,7 @@ import { tokens } from "../theme";
 import { ResponsiveLine } from "@nivo/line";
 import { mockLineData as data } from "../data/mockData";
 
-const LineChart = ({ isDashboard = false }) => {
+const LineChart = ({ isDashboard = false, isPrintModal = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -15,21 +15,21 @@ const LineChart = ({ isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
+              stroke: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
           legend: {
             text: {
-              fill: colors.grey[100],
+              fill: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
           ticks: {
             line: {
-              stroke: colors.grey[100],
+              stroke: isPrintModal ? colors.grey[900] : colors.grey[100],
               strokeWidth: 1,
             },
             text: {
-              fill: colors.grey[100],
+              fill: isPrintModal ? colors.grey[900] : colors.grey[100],
             },
           },
         },
@@ -40,7 +40,7 @@ const LineChart = ({ isDashboard = false }) => {
         },
         legends: {
           text: {
-            fill: colors.grey[500],
+            fill: isPrintModal ? colors.grey[900] : colors.grey[100],
           },
         },
 
