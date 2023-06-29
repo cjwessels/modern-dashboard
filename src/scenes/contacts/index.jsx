@@ -17,7 +17,7 @@ const Contacts = () => {
 
   const handleFilter = () => {
     // getFilterList(mockDataContacts)
-    alert('ASAD Bitses')
+    alert('Coming Soon')
   };
 
   const columns = [
