@@ -14,6 +14,7 @@ import Bar from './scenes/bar';
 import Pie from './scenes/pie';
 import Line from './scenes/line';
 import Geo from './scenes/geo';
+import GMaps from './scenes/gmaps';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -37,6 +38,7 @@ function App() {
               <Route path='/pie' element={<Pie />} />
               <Route path='/line' element={<Line />} />
               <Route path='/geography' element={<Geo />} />
+              <Route path='/googlemaps' element={<GMaps />} />
             </Routes>
           </main>
         </div>

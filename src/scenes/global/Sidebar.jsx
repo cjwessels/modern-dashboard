@@ -18,6 +18,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -74,7 +75,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={isCollapsed} >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
@@ -177,6 +178,13 @@ const Sidebar = () => {
                 title="Profile Form"
                 to="/form"
                 icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Google Map"
+                to="/googlemaps"
+                icon={<FmdGoodIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
