@@ -15,6 +15,7 @@ import Pie from './scenes/pie';
 import Line from './scenes/line';
 import Geo from './scenes/geo';
 import GMaps from './scenes/gmaps';
+import RandomQuote from './scenes/random';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -23,7 +24,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className='app'>
-          <Sidebar />
+          <Sidebar className='sidebar' />
           <main className='content'>
             <Topbar />
             <Routes>
@@ -39,6 +40,7 @@ function App() {
               <Route path='/line' element={<Line />} />
               <Route path='/geography' element={<Geo />} />
               <Route path='/googlemaps' element={<GMaps />} />
+              <Route path='/random' element={<RandomQuote />} />
             </Routes>
           </main>
         </div>

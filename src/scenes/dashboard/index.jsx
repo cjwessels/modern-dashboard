@@ -37,6 +37,7 @@ import PrintDashboard from "../../components/printComponents/Dashboard";
 import DashboardReport from "../../components/printComponents/DashboardReport";
 
 const Dashboard = () => {
+  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -107,8 +108,6 @@ const Dashboard = () => {
   useEffect(() => {
     setExportData(newData());
   }, []);
-
-  console.log(exportData);
 
   const modalStyle = {
     position: "absolute",

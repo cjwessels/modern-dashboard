@@ -19,6 +19,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -46,7 +47,8 @@ const Sidebar = () => {
   return (
     <Box    
       sx={{
-        
+        // minHeight: window.outerHeight,
+        minHeight: '100%',
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -165,7 +167,6 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              {console.log(selected)}
 
               <Typography
                 variant={!isCollapsed ? "h4" : "h5"}
@@ -199,6 +200,13 @@ const Sidebar = () => {
                 title="FAQ Page"
                 to="/faq"
                 icon={<HelpOutlineOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Random Quotes"
+                to="/random"
+                icon={<FormatQuoteIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

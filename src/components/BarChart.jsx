@@ -42,7 +42,8 @@ const BarChart = ({ isDashboard = false, isPrintModal = false }) => {
         tooltip: {
           container: {
             background: colors.greenAccent[800],
-            fontSize: 12,
+            fontSize:14,
+            color: 'red'
           },
           basic: {},
           chip: {},

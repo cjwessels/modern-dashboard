@@ -57,8 +57,6 @@ const GMaps = () => {
     console.log("Unable to retrieve your location");
   }
 
-  console.log(process.env.REACT_APP_GMAP)
-
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
