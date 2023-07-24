@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import GoogleMapView from "../../components/GoogleMapView";
 import {
   Box,
   Button,
@@ -8,6 +9,7 @@ import {
   Modal,
   Grow,
 } from "@mui/material";
+import AddressFormView from "../../components/AddressFormView";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import jsPDF from "jspdf";
@@ -108,8 +110,6 @@ const Dashboard = () => {
     setExportData(newData());
   }, []);
 
-  console.log(exportData);
-
   const modalStyle = {
     position: "absolute",
     top: "50%",
@@ -154,6 +154,14 @@ const Dashboard = () => {
   const [openReport, setOpenReport] = useState(false);
   const handleOpenReport = () => setOpenReport(true);
   const handleCloseReport = () => setOpenReport(false);
+
+  
+  const [modalTransactionData, setModalTransactionData] = useState({});
+  const [openTransaction, setOpenTransaction] = useState(false);
+  const handleOpenTransaction = (transaction) => {
+    console.log(modalTransactionData)
+    setOpenTransaction(true)};
+  const handleCloseTransaction = () => setOpenTransaction(false);
 
   const navigate = useNavigate();
 
@@ -314,7 +322,7 @@ const Dashboard = () => {
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                R59,342.32
               </Typography>
             </Box>
             <Box>
@@ -359,7 +367,7 @@ const Dashboard = () => {
         <Box
           id="multiPDF2"
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 4"
           backgroundColor={colors.primary[400]}
           overflow="auto"
           sx={{
@@ -388,15 +396,22 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
-            <Box
+          {mockTransactions.map((transaction, i) =>(
+            <Box            
               key={`${transaction.txId}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
               p="15px"
+              onClick={
+                () =>{ setModalTransactionData(transaction);
+                handleOpenTransaction()}
+                // () =>console.log(transaction)
+              }
             >
+              {/* {console.log(transaction)}  */}
+              
               <Box>
                 <Typography
                   color={colors.greenAccent[500]}
@@ -415,7 +430,7 @@ const Dashboard = () => {
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                R{transaction.cost}
               </Box>
             </Box>
           ))}
@@ -443,7 +458,7 @@ const Dashboard = () => {
               color={colors.greenAccent[500]}
               sx={{ mt: "15px" }}
             >
-              $48,352 revenue generated
+              R48,352 revenue generated
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
@@ -470,7 +485,7 @@ const Dashboard = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
-        <Box
+        {/* <Box
           id="geo"
           sx={{ cursor: "zoom-in" }}
           gridColumn="span 4"
@@ -492,7 +507,7 @@ const Dashboard = () => {
           <Box height="200px">
             <GeoChart isDashboard={true} />
           </Box>
-        </Box>
+        </Box> */}
       </Box>
       <Modal
         open={open}
@@ -518,6 +533,57 @@ const Dashboard = () => {
         <Box sx={{ ...modalStyle, overflow: "scroll", overflowX: "hidden" }}>
           <DashboardReport closeReport={handleCloseReport} />
         </Box>
+      </Modal>
+      <Modal
+        open={openTransaction}
+        onClose={handleCloseTransaction}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Grow
+          in={openTransaction}
+          out={!openTransaction}
+          style={modalStyle}
+          {...(openTransaction ? { timeout: 1000 } : { timeout: 1000 })}
+        >
+          
+          <Box sx={modalStyle}>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(12, 1fr)"
+              gridAutoRows="140px"
+              gap="20px"
+              m='45px'
+              >            
+              <Box
+                gridColumn="span 12"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+              </Box>
+              <Box
+                gridColumn="span 4"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <AddressFormView handleFormValue={modalTransactionData}></AddressFormView>
+              </Box>
+              <Box
+                gridColumn="span 8"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <GoogleMapView locate='place' location={modalTransactionData?.gmap_adress} />
+              </Box>
+            </Box>
+          </Box>
+        </Grow>
       </Modal>
     </Box>
   );

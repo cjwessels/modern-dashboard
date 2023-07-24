@@ -31,7 +31,7 @@ const userSchema = yup.object().shape({
     city: yup.string(),
 })
 
-const AddressForm = (props) => {
+const AddressFormView = (props) => {
     
   const handleFormValue = props.handleFormValue
   const theme = useTheme();
@@ -57,11 +57,11 @@ const AddressForm = (props) => {
 
     const isNonMobile = useMediaQuery("(min-width:600)")
 
-    const handleFormSubmit = (values, {resetForm}) =>{
-        handleFormValue(values)
-        resetForm({values:''});
-        handleClick()
-    }
+    // const handleFormSubmit = (values, {resetForm}) =>{
+    //     handleFormValue(values)
+    //     resetForm({values:''});
+    //     handleClick()
+    // }
 
     return (
         <Box 
@@ -81,7 +81,7 @@ const AddressForm = (props) => {
           p='15px'
         >
 <Formik 
-                onSubmit={(values, resetForm) => handleFormSubmit(values, resetForm)}                
+                // onSubmit={(values, resetForm) => handleFormSubmit(values, resetForm)}                
                 initialValues={initialValues}
                 validationSchema={userSchema}
             >
@@ -103,7 +103,7 @@ const AddressForm = (props) => {
                                 label='Business Name'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.businessName}
+                                value={handleFormValue?.businessName}
                                 name='businessName'
                                 error={!!touched.businessName && !!errors.businessName}
                                 helperText={touched.businessName && errors.businessName}       
@@ -116,7 +116,7 @@ const AddressForm = (props) => {
                                 label='Street Name'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.streetName}
+                                value={handleFormValue.streetName}
                                 name='streetName'
                                 error={!!touched.streetName && !!errors.streetName}
                                 helperText={touched.streetName && errors.streetName}
@@ -129,7 +129,7 @@ const AddressForm = (props) => {
                                 label='Number'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.number}
+                                value={handleFormValue.number}
                                 name='number'
                                 error={!!touched.number && !!errors.number}
                                 helperText={touched.number && errors.number}       
@@ -142,7 +142,7 @@ const AddressForm = (props) => {
                                 label='Postal Code'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.postal}
+                                value={handleFormValue.postal}
                                 name='postal'
                                 error={!!touched.postal && !!errors.postal}
                                 helperText={touched.postal && errors.postal}
@@ -155,7 +155,7 @@ const AddressForm = (props) => {
                                 label='Suburb'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.suburb}
+                                value={handleFormValue.suburb}
                                 name='suburb'
                                 error={!!touched.suburb && !!errors.suburb}
                                 helperText={touched.suburb && errors.suburb}       
@@ -168,21 +168,21 @@ const AddressForm = (props) => {
                                 label='City'
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.city}
+                                value={handleFormValue.city}
                                 name='city'
                                 error={!!touched.city && !!errors.city}
                                 helperText={touched.city && errors.city}
                                 sx={{gridColumn: 'span 4'}}
                                 />
                         </Box>
-                        <Box display="flex" justifyContent='end' mt='20px'>
+                        {/* <Box display="flex" justifyContent='end' mt='20px'>
                             <Button type='submit' variant="contained" color='warning' size="small" sx={{fontWeight: 'bold'}}>Check Location</Button>
                             <Snackbar open={openMessage} autoHideDuration={6000} onClose={handleClose}>
                                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                                     Successfully Found! 
                                 </Alert>
                             </Snackbar>
-                        </Box>
+                        </Box> */}
                     </form>
                 )}
             </Formik>
@@ -194,4 +194,4 @@ const AddressForm = (props) => {
     )
 }
 
-export default AddressForm
+export default AddressFormView
