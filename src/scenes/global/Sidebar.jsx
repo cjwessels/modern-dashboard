@@ -106,8 +106,8 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          <Box mb="25px">
-            <Box display="flex" justifyContent="center" alignItems="center">
+          <Box mb="25px" >
+            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={'#1F2A40'} >
               {!isCollapsed && (
                 <img
                   alt="profile-user"
