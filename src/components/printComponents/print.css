@@ -1,0 +1,82 @@
+/* .input-print-style > * {
+    border-radius: 0  !important;
+}
+
+.input-print-style > * > * {
+    border-top: none  !important;
+    border-bottom: none  !important;
+    border-radius: none !important;
+    border-color: rgb(20, 20, 21);
+
+}
+
+.p-print-avoid-break {
+    width: 100%;
+}
+.no-print-break {
+    width: 100%;
+} */
+
+
+@media print{    
+  
+    /* {
+        font-size: 0.5em;            
+    } */
+    .justify_print {
+        font-size: 15px !important;
+    }
+    /* .justify_logo_print {
+        margin: 0 auto;
+        max-height: 100% !important;
+            min-width: 80% !important;
+          max-width: 80% !important;
+    } */
+    /* .emogi-list {
+        font-size:40em !important;
+        background-color: none; 
+    } */
+    .d-print-none{
+        display:none !important;
+        
+    }
+    .p-print-avoid-break {
+        page-break-inside: avoid !important;
+        padding-top: 10px !important;
+        /* padding-bottom: 25px; */
+        margin-top:5px !important;
+        margin-bottom:25px;
+        
+    }
+    .no-print-break {
+        break-inside: avoid !important;
+      }
+    /* .main-style{
+        padding: 5px 15px !important;        
+    }
+    .input-print-style > * {
+        border-radius: 0  !important;
+    } */
+
+    .input-print-style > * > * {
+        border: none  !important;
+    } */
+/* 
+    .emogi-list {
+        background: none !important;
+    } */
+    
+/* 
+    .border-bottom {
+        border-bottom: 1px solid #0f0f0f !important;
+    } */
+
+    button {display: none !important}
+    
+}
+
+@page {
+    size: 210mm 297mm; 
+    /* Chrome sets own margins, we change these printer settings */
+    margin: 10mm 5mm 10mm 5mm; 
+  }

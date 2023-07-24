@@ -1,8 +1,10 @@
+import { useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useEffect } from "react";
 import CustomToolbar from "../CustomToolbar";
 import { mockDataContacts } from "../../data/mockData";
+import { useReactToPrint } from 'react-to-print';
 
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
@@ -17,7 +19,24 @@ import Header from "../../components/Header";
 import PictureAsPdfOutlinedIcon from "@mui/icons-material/PictureAsPdfOutlined";
 import { PrintOutlined } from "@mui/icons-material";
 
+import './print.css'
+
 const DashboardReport = ({ closeReport }) => {
+
+  const componentRef = useRef();
+
+  const CreatePDFPrint= async () => {
+    const pdf = new jsPDF("portrait", "pt", "a4");
+    const data = await html2canvas(document.querySelector("#modalPDF"));
+    const img = data.toDataURL("image/png");
+    // closeReport()
+  };
+  
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    // content: () => componentRef.current,
+  });
+
   // const closeReport = props.handleCloseReport
   const theme = useTheme();
   const colors = tokens(!theme.palette.mode);
@@ -35,8 +54,8 @@ const DashboardReport = ({ closeReport }) => {
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
     pdf.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.autoPrint({variant: 'non-conform'})
     pdf.save("shipping_label.pdf");
-    // closeReport()
   };
 
 
@@ -126,24 +145,27 @@ const DashboardReport = ({ closeReport }) => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
-            onClick={() => createPDF()}
+            onClick={() => handlePrint()}
           >
             <PrintOutlined sx={{ mr: "10px" }} />
             Print
           </Button>
         </Box>
       </Box>
-
       <Box
-        backgroundColor={colors.primary[900]}
+        ref={componentRef}
+        backgroundColor={'#fff'}
         id="modalPDF"
         display="grid"
+        width={'100%'}
         gridTemplateColumns="repeat(12, 8fr)"
         gridAutoRows="220px"
         gap="20px"
         p="30px"
       >
         <Box
+        className='no-print-break'
+        sx={{maxWidth: '100%', border: 'solid #000 1px', borderRadius: '5px'}}
           gridColumn="span 12"
           
           gridRow="span 2"
@@ -152,12 +174,13 @@ const DashboardReport = ({ closeReport }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <BarChart
+          <BarChart            
             isDashboard={false}
             isPrintModal={true}
           />
         </Box>
         <Box
+        
         gridColumn="span 12"        
         gridRow="span 3"
         display="flex"
@@ -230,6 +253,7 @@ const DashboardReport = ({ closeReport }) => {
         />
       </Box>
         <Box
+        sx={{maxWidth: '100%', border: 'solid #000 1px', borderRadius: '5px'}}
           gridColumn="span 12"
           gridRow="span 2"
         //   backgroundColor={colors.primary[100]}
@@ -237,7 +261,10 @@ const DashboardReport = ({ closeReport }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <LineChart isDashboard={false} isPrintModal={true} />
+          <LineChart 
+          
+          
+          isDashboard={false} isPrintModal={true} />
         </Box>
       </Box>
     </Box>
