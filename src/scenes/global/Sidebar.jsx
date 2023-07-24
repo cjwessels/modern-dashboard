@@ -111,10 +111,10 @@ const Sidebar = () => {
               {!isCollapsed && (
                 <img
                   alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/cjw.jpg`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                  width="190px"
+                  height="auro"
+                  src={`../../assets/logo.png`}
+                  style={{ cursor: "pointer", borderRadius: "0%" }}
                 />
               )}
             </Box>
@@ -125,11 +125,11 @@ const Sidebar = () => {
                 fontWeight="bold"
                 sx={{ m: "10px 0 0 0" }}
               >
-                {!isCollapsed && "Christiaan Wessels"}
+                {/* {!isCollapsed && "ESI Attorneys"} */}
               </Typography>
-              <Typography variant="h5" color={colors.greenAccent[500]}>
+              {/* <Typography variant="h5" color={colors.greenAccent[500]}>
                 Admin
-              </Typography>
+              </Typography> */}
             </Box>
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
               <Item

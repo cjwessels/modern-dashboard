@@ -60,7 +60,7 @@ const handleLocationReset = props.handleLocationReset
       >
         {/* ROW 1 */}
         <Box
-          gridColumn="span 2"
+          gridColumn="span 1"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -70,7 +70,7 @@ const handleLocationReset = props.handleLocationReset
             {/* {!location ? <Button variant="contained" onClick={handleLocationClick}>Get Geo Location</Button> : <Button variant="contained" onClick={handleLocationReset}>Reset</Button>} */}
         </Box>
         <Box
-          gridColumn="span 10"
+          gridColumn="span 11"
           p='10px'
           backgroundColor={colors.primary[400]}
           display="flex"

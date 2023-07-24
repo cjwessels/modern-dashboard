@@ -166,7 +166,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <Box m="20px" sx={{ maxHeight: "100vh !important" }}>
+    <Box m="20px" sx={{ maxHeight: "100% !important", padding: ' 0 0 10px 0' }}>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography
           variant="h3"
@@ -177,7 +177,7 @@ const Dashboard = () => {
           {reportingDate}
         </Typography>
         <Header
-          title="MODERN DASHBOARD"
+          title="ESI DASHBOARD"
           subtitle="Welcome to the modern dashboard"
         />
         <Box>
@@ -369,11 +369,11 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 4"
           backgroundColor={colors.primary[400]}
-          overflow="auto"
+          // overflow="auto"
           sx={{
             "& ::-webkit-scrollbar": {
               // display: "none !important",
-              width: "6px !important",
+              width: "2px !important",
             },
             "& ::-webkit-scrollbar-track": {
               // background: '#868dfb',
@@ -396,14 +396,28 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) =>(
-            <Box            
+          <Box
+            // display="flex"
+            overflow='auto'
+            maxHeight='91%'
+            justifyContent="space-between"
+            alignItems="center"
+            borderBottom={`4px solid ${colors.primary[500]}`}
+            colors={colors.grey[100]}
+            // p="15px"
+            // mt='-15px'
+            paddingBottom='15px'
+          >
+            {mockTransactions.map((transaction, i) =>(
+            <Box                     
               key={`${transaction.txId}-${i}`}
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
+              marginTop='15px'
               p="15px"
+              paddingBottom='15px'
               onClick={
                 () =>{ setModalTransactionData(transaction);
                 handleOpenTransaction()}
@@ -412,7 +426,7 @@ const Dashboard = () => {
             >
               {/* {console.log(transaction)}  */}
               
-              <Box>
+              <Box width='30%' >
                 <Typography
                   color={colors.greenAccent[500]}
                   variant="h5"
@@ -424,8 +438,9 @@ const Dashboard = () => {
                   {transaction.user}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+              <Box color={colors.grey[100]}  width='60%' >{transaction.date}</Box>
               <Box
+                width='100px'
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
@@ -434,6 +449,9 @@ const Dashboard = () => {
               </Box>
             </Box>
           ))}
+
+          </Box>
+          
         </Box>
 
         {/* ROW 3 */}
@@ -551,17 +569,108 @@ const Dashboard = () => {
             <Box
               display="grid"
               gridTemplateColumns="repeat(12, 1fr)"
-              gridAutoRows="140px"
+              // gridAutoRows="140px"
               gap="20px"
-              m='45px'
+              m='15px'
               >            
               <Box
-                gridColumn="span 12"
+                gridColumn="span 3"
                 backgroundColor={colors.primary[400]}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
               >
+            
+              <Typography
+              pr='10px'
+                variant="h4"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Transaction id: 
+              </Typography>
+              <Typography
+                variant="h4"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                {modalTransactionData?.txId}
+              </Typography>
+            
+              </Box>
+              <Box
+                gridColumn="span 3"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+            
+              <Typography
+              pr='10px'
+                variant="h4"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                ESI agent: 
+              </Typography>
+              <Typography
+                variant="h4"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                {modalTransactionData?.user}
+              </Typography>
+            
+              </Box>
+              <Box
+                gridColumn="span 3"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+            
+              <Typography
+              pr='10px'
+                variant="h4"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Transaction value: 
+              </Typography>
+              <Typography
+                variant="h4"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                {modalTransactionData?.cost}
+              </Typography>
+            
+              </Box>
+              <Box
+                gridColumn="span 3"
+                backgroundColor={colors.primary[400]}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+            
+              <Typography pr='10px'
+                variant="h4"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Date: 
+              </Typography>
+              <Typography
+                variant="h4"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                {modalTransactionData?.date}
+              </Typography>
+            
               </Box>
               <Box
                 gridColumn="span 4"

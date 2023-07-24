@@ -17,6 +17,15 @@ const Topbar = () => {
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
+      {/* <Box>
+      <img
+                  alt="profile-user"
+                  width="100px"
+                  height="auto"
+                  src={`../../assets/logo.png`}
+                  style={{ cursor: "pointer", borderRadius: "0%" }}
+                />
+      </Box> */}
       {/* SEARCHBAR  */}
       <Box
         display="flex"
@@ -28,6 +37,7 @@ const Topbar = () => {
           <SearchIcon />
         </IconButton>
       </Box>
+      
       {/* ICONS */}
       <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>
