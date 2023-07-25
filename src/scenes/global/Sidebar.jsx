@@ -109,7 +109,7 @@ const Sidebar = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              margin: "15px 0 20px 0",
               color: colors.grey[100],
             }}
           >
@@ -119,16 +119,16 @@ const Sidebar = () => {
                 textAlign="center"
                 justifyContent="space-between"
                 alignItems="center"
-                ml="15px"
+                // ml="-5px"
               >
                 
                 {!isCollapsed && (
                 <img
                   alt="profile-user"
-                  width="190px"
+                  width="180px"
                   height="auro"
-                  src={`../../assets/logo.png`}
-                  style={{ cursor: "pointer", borderRadius: "0%" }}
+                  src={`../../assets/placeholder.png`}
+                  style={{ cursor: "pointer", borderRadius: "0%", backgroundColor: colors.greenAccent[600], padding: '10px', borderRadius: '8px' }}
                 />
               )}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -139,8 +139,8 @@ const Sidebar = () => {
           </MenuItem>
 
           <Box mb="25px" >
-            <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={'#1F2A40'} >
-            <Typography variant="h3" color={colors.grey[100]} sx={{fontSize: !isCollapsed ? '2em': '1em', textAlign: 'center !important'}}>
+            <Box display="flex" justifyContent="center" alignItems="center"  >
+            <Typography variant="h3" color={colors.grey[100]} sx={{fontSize: !isCollapsed ? '2em': '1em', textAlign: 'center !important' , color:colors.greenAccent[600]}}>
                   {selected.toUpperCase()}
                 </Typography>
             </Box>

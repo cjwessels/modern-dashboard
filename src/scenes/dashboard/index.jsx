@@ -415,7 +415,7 @@ const Dashboard = () => {
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
-              marginTop='15px'
+              // marginTop='15px'
               p="15px"
               paddingBottom='15px'
               onClick={
@@ -423,6 +423,7 @@ const Dashboard = () => {
                 handleOpenTransaction()}
                 // () =>console.log(transaction)
               }
+              sx={{":hover": {cursor: 'pointer', backgroundColor: colors.primary[600]}}}
             >
               {/* {console.log(transaction)}  */}
               
