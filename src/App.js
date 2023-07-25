@@ -1,3 +1,5 @@
+import { tokens } from './theme';
+
 import { ColorModeContext, useMode } from './theme';
 import { Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -19,13 +21,33 @@ import RandomQuote from './scenes/random';
 
 function App() {
   const [theme, colorMode] = useMode();
+  const colors = tokens(theme.palette.mode);
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className='app'>
           <Sidebar className='sidebar' />
-          <main className='content'>
+          <main
+            className='content'
+            sx={{
+              '& ::-webkit-scrollbar': {
+                // display: "none !important",
+                width: '2px !important',
+              },
+              '& ::-webkit-scrollbar-track': {
+                // background: '#868dfb',
+                background: '#fff',
+              },
+              '& ::-webkit-scrollbar-thumb': {
+                background: `${
+                  theme.palette.mode === 'dark'
+                    ? colors.blueAccent[300]
+                    : colors.blueAccent[100]
+                } !important`,
+              },
+            }}
+          >
             <Topbar />
             <Routes>
               <Route path='/' element={<Dashboard />} />

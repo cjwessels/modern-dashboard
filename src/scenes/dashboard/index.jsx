@@ -380,7 +380,7 @@ const Dashboard = () => {
               background: "#fff",
             },
             "& ::-webkit-scrollbar-thumb": {
-              background: colors.blueAccent[700],
+              background: `${theme.palette.mode ==='dark'? colors.blueAccent[300] : colors.blueAccent[100]} !important`
             },
           }}
         >
@@ -572,6 +572,13 @@ const Dashboard = () => {
               // gridAutoRows="140px"
               gap="20px"
               m='15px'
+              sx={{"& ::-webkit-scrollbar-track": {
+                // background: '#868dfb',
+                background: '#fff'
+              },
+              "& ::-webkit-scrollbar-thumb": {
+                background: `${theme.palette.mode ==='dark'? colors.blueAccent[300] : colors.blueAccent[100]} !important`
+              },}}
               >            
               <Box
                 gridColumn="span 3"

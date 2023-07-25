@@ -73,7 +73,7 @@ const Sidebar = () => {
           background: '#fff'
         },
         "& ::-webkit-scrollbar-thumb": {
-          background: '#6870fa'
+          background: `${theme.palette.mode ==='dark'? colors.blueAccent[300] : colors.blueAccent[100]} !important`
         },
       }}
     >

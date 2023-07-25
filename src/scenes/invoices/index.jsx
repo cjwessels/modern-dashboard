@@ -73,21 +73,25 @@ const Invoices = () => {
             borderBottom: "none",
           },
           "& .name-column--cell": {
-            color: colors.greenAccent[300],
+            color: theme.palette.mode ==='dark' ? colors.greenAccent[500] : colors.greenAccent[800],
+            fontWeight: 'bold',
+            fontSize: '1.3em'
           },
           "& .cost-column--cell": {
-            backgroundColor: colors.greenAccent[500],
+            backgroundColor:  theme.palette.mode ==='dark' ?  colors.greenAccent[500] : colors.greenAccent[800] ,
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: theme.palette.mode ==='dark' ? colors.blueAccent[700] : colors.greenAccent[600],
             borderBottom: "none",
+            fontWeight: 'bold !important',
+            fontSize: '1.3em'
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: theme.palette.mode ==='dark' ? colors.blueAccent[700] : colors.greenAccent[600],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
