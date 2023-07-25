@@ -335,7 +335,7 @@ const Dashboard = () => {
                   sx={{
                     ":hover": {
                       backgroundColor: "#58117e",
-                      color: "white",
+                      color: "white !important",
                     },
                     backgroundColor: colors.blueAccent[700],
                     borderRadius: "5px",
@@ -345,7 +345,7 @@ const Dashboard = () => {
                   }}
                 >
                   <DownloadOutlinedIcon
-                    sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                    sx={{ fontSize: "26px", color:  theme.palette.mode ==='dark' ? colors.greenAccent[500] : colors.greenAccent[100],  }}
                   />{" "}
                   Download raw data csv
                 </IconButton>

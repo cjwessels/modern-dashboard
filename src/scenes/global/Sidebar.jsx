@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Tooltip } from "react-tooltip";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { Box, IconButton, Typography, useTheme, styled  } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 // -- Menu Icons -- //
@@ -21,29 +21,54 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  );
-};
+
+
 
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
+
+
+  const Item = ({ title, to, icon, selected, setSelected }) => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+  
+    
+  const HtmlTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: colors.greenAccent[600],
+      color: '#dadde9',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(24),
+      border: '1px solid #dadde9',
+      display: isCollapsed=== true ? 'block':'none'
+    },
+    [`& .${tooltipClasses.arrow}`]: {
+      color: '#dadde9',
+    },
+  }));
+  
+    return ( 
+    <HtmlTooltip title={title} placement="right" arrow >
+      <MenuItem
+        active={selected === title}
+        style={{
+          color: colors.grey[100],
+        }}
+        onClick={() => setSelected(title)}
+        icon={icon}
+      >
+        <Typography>{title}</Typography>
+        <Link to={to} />
+      </MenuItem> 
+    </HtmlTooltip>
+    );
+  };
+
   return (
     <Box    
       sx={{
@@ -96,9 +121,16 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  DASHBOARD
-                </Typography>
+                
+                {!isCollapsed && (
+                <img
+                  alt="profile-user"
+                  width="190px"
+                  height="auro"
+                  src={`../../assets/logo.png`}
+                  style={{ cursor: "pointer", borderRadius: "0%" }}
+                />
+              )}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
@@ -108,15 +140,9 @@ const Sidebar = () => {
 
           <Box mb="25px" >
             <Box display="flex" justifyContent="center" alignItems="center" backgroundColor={'#1F2A40'} >
-              {!isCollapsed && (
-                <img
-                  alt="profile-user"
-                  width="190px"
-                  height="auro"
-                  src={`../../assets/logo.png`}
-                  style={{ cursor: "pointer", borderRadius: "0%" }}
-                />
-              )}
+            <Typography variant="h3" color={colors.grey[100]} sx={{fontSize: !isCollapsed ? '2em': '1em', textAlign: 'center !important'}}>
+                  {selected.toUpperCase()}
+                </Typography>
             </Box>
             <Box textAlign="center">
               <Typography
@@ -145,23 +171,23 @@ const Sidebar = () => {
                 sx={{ m: "15px 0 5px 20px" }}
               >
                 Data
-              </Typography>
+              </Typography>              
               <Item
-                title="Manage Team"
+                title="Team"
                 to="/team"
                 icon={<PeopleOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              />              
               <Item
-                title="Contacts Information"
+                title="Contacts"
                 to="/contacts"
                 icon={<ContactsOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="Invoices Balances"
+                title="Invoices"
                 to="/invoices"
                 icon={<ReceiptOutlinedIcon />}
                 selected={selected}
