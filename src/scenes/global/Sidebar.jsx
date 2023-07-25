@@ -59,10 +59,10 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: `${theme.palette.mode ==='dark'? colors.blueAccent[400] : colors.grey[900]} !important`,
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: `${theme.palette.mode ==='dark'? colors.blueAccent[300] : colors.grey[800]} !important`,
         },
         "& ::-webkit-scrollbar": {
           // display: "none !important",
