@@ -53,7 +53,7 @@ const Sidebar = () => {
   }));
   
     return ( 
-    <HtmlTooltip title={title} placement="right" arrow >
+    <HtmlTooltip title={title} placement="right" arrow onClick={() => setSelected(title)}>
       <MenuItem
         active={selected === title}
         style={{
@@ -128,7 +128,7 @@ const Sidebar = () => {
                   width="180px"
                   height="auro"
                   src={`../../assets/placeholder.png`}
-                  style={{ cursor: "pointer", borderRadius: "0%", backgroundColor: colors.greenAccent[600], padding: '10px', borderRadius: '8px' }}
+                  style={{ cursor: "pointer",  backgroundColor: colors.greenAccent[600], padding: '10px', borderRadius: '8px' }}
                 />
               )}
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
